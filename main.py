@@ -223,13 +223,13 @@ async def handle_message(message: types.Message):
 async def main():
     logging.basicConfig(level=logging.INFO)
     print("Bot ishga tushdi...")
-    await dp.start_polling(bot)
+    # handle_signals=False — mana shu qism xatolikni yo'qotadi
+    await dp.start_polling(bot, handle_signals=False)
 
 if __name__ == "__main__":
-    async def run_bot():
-        try:
-            await main()
-        except (KeyboardInterrupt, SystemExit):
-            logging.info("Bot to'xtatildi")
+    try:
+        asyncio.run(main())
+    except (KeyboardInterrupt, SystemExit):
+        logging.info("Bot to'xtatildi")
 
     asyncio.run(run_bot())
